@@ -17,6 +17,8 @@ router.get('/me', auth, async (req, res) => {
 
         // return res.json({ user: req.user.id })
 
+        console.log('USER ID: ' + req.user.id)
+
         const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar'])
 
         if (!profile) {
@@ -495,11 +497,12 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
 // @access  Public
 router.get('/github/:username', async (req, res) => {
     try {
-        const options = {
-            uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientId')}&client_secret=${config.get('githubSecret')}`,
+
+        options = {
+            url: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientId')}&client_secret=${config.get('githubSecret')}`,
             method: 'GET',
-            header: { 'user-agent': 'node.js' }
-        };
+            headers: { "User-Agent": "node.js" }
+        }
 
         request(options, (error, response, body) => {
             if (error) {

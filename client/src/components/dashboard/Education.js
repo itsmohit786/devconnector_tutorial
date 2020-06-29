@@ -26,7 +26,6 @@ const Education = ({ education, deleteEducation }) => {
     ));
     return (
         <Fragment>
-
             <h2 className="my-2">Education Credentials</h2>
             <table className="table">
                 <thead>
@@ -38,7 +37,6 @@ const Education = ({ education, deleteEducation }) => {
                     </tr>
                 </thead>
                 <tbody>
-
                     {
                         <>
                             {education.length === 0 ? 'No Education record exists' : educations}
